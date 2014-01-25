@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["shanebdavis@gmail.com"]
   spec.description   = %q{opinionated javascript-AMD-module generator}
   spec.summary       = %q{NeptuneCoffee is an opinionated module generator. Modules and namespaces are automatically generated based on the project's directory names and structure.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/Imikimi-LLC/neptune_coffee"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
