@@ -1,0 +1,43 @@
+#!/usr/bin/ruby
+
+require 'trollop'
+require File.expand_path(File.join(File.dirname(__FILE__),'..','lib','neptune_coffee'))
+
+options = Trollop::options ARGV do
+  banner <<ENDBANNER
+NeptuneCoffee
+
+An opinionated javascript AMD module generator.
+
+For every $subdir, generates:
+  $subdir/neptune.js    // adds all sub-namespaces to $subdir's namespace object
+  $subdir/namespace.js  // defines $subdir's namespace object
+  $subdir.js            // loads all .js files in $subdir recursively
+
+* All three generated files return $subdir's namespace object.
+* Client's should require $subdir.js.
+* Source files in $subdir/ should require $subdir/neptune.js
+
+Options:
+ENDBANNER
+
+  opt :root, "recursively generate files in root and all subdirectories", :type => :string
+  opt :force, "force file generation"
+  opt :overwrite, "overwrite all existing files. Otherwise, generated/source-file name conflicts report a warning and do not overwrite the source."
+  opt :files, "(DEBUG) only generate these files", :type => :strings
+  opt :dirs, "(DEBUG) show dirs affected by files option (no actions are taken)"
+  opt :verbose, "show contents of generated files"
+end
+
+Trollop::die "root options is required" unless options.root
+Trollop::die "dirs option requires files option" if options.dirs and not options.files
+
+generator = NeptuneCoffee::Generator.new options
+if options.dirs
+  puts "files: #{options.files.join ', '}"
+  puts "effects: #{generator.dirs_effected(options.files).inspect}"
+elsif options.files
+  generator.generate_on_changes options.files
+else
+  generator.generate_all
+end
