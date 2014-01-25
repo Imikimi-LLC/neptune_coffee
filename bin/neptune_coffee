@@ -10,13 +10,12 @@ NeptuneCoffee
 An opinionated javascript AMD module generator.
 
 For every $subdir, generates:
-  $subdir/neptune.js    // adds all sub-namespaces to $subdir's namespace object
   $subdir/namespace.js  // defines $subdir's namespace object
   $subdir.js            // loads all .js files in $subdir recursively
 
-* All three generated files return $subdir's namespace object.
-* Client's should require $subdir.js.
-* Source files in $subdir/ should require $subdir/neptune.js
+* both generated files return $subdir's namespace object.
+* Clients should require $subdir.js.
+* Source files should require ./namespace.js
 
 Options:
 ENDBANNER
