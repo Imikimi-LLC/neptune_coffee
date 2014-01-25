@@ -21,11 +21,11 @@ NeptuneCoffee generates the .js files to define your AMD modules.
 NeptuneCoffee has an opinion about how you should organize your javascript for AMD modules. It is:
 
 * Directories are AMD modules
-* Directory names the AMD module names
-* Directory names snake_case
-* generated AMD module names are CamelCase
+* Directory's name defines the AMD module's name
+* Directory names should be snake_case
+* generated AMD module names will be CamelCase
 * require "foo/bar" includes all files in the module defined by the directory "foo/bar"
-* Defines a global namespace for accessing AMD modules: window.Neptune.YourRootModule.YourSubModule
+* Defines a hierachical namespace based on module names and directory structure nesting
 
 ## Benefit
 
