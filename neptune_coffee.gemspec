@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = NeptuneCoffee::VERSION
   spec.authors       = ["Shane Brinkman-Davis"]
   spec.email         = ["shanebdavis@gmail.com"]
-  spec.description   = %q{Opinonated CoffeeScript client-side development}
-  spec.summary       = %q{NeptuneCoffee is an opinionated module generator. All you have to do is organize your files into a directory structure where the directory names are module names and the hierarchy reflects sub-modules.}
+  spec.description   = %q{opinionated javascript-AMD-module generator}
+  spec.summary       = %q{NeptuneCoffee is an opinionated module generator. Modules and namespaces are automatically generated based on the project's directory names and structure.}
   spec.homepage      = ""
   spec.license       = "MIT"
 

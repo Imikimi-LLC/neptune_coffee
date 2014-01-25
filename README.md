@@ -13,9 +13,9 @@ This is a work in progress. The basic idea of directories-define-modules is core
 * minimize refactoring complexity
 * minimize the amount of code you have to write
 
-If you are working with dozens or hundreds of Javascript files, wouldn't you like some way to easily organize them into modules? 
+If you are working with dozens or hundreds of Javascript files, wouldn't you like some way to easily organize them into modules?
 
-NeptuneCoffee is an opinionated module generator. All you have to do is organize your files into a directory structure where the directory names are module names and the hierarchy reflects sub-modules.
+NeptuneCoffee is an opinionated module generator. Modules and namespaces are automatically generated based on the project's directory names and structure.
 
 NeptuneCoffee generates the .js files to define your AMD modules.
 
@@ -45,7 +45,7 @@ For every $subdir, NeptuneCoffee generates:
 # How to Use
 
 Install neptune_coffee (see below). Then, whenever your directory structure changes or you move/add/rename/delete files, run:
-    
+
     neptune_coffee -r source/root
 
 * Client should require: **$subdir.js** for the AMD module **source/root/$subdir**
@@ -56,9 +56,9 @@ Install neptune_coffee (see below). Then, whenever your directory structure chan
 Given this directory structure and files:
 
     geometry/solids/cone.js
-    geometry/box.js    
+    geometry/box.js
     geometry/circle.js
-    
+
 NeptineCoffee generates:
 
 	geometry.js
@@ -80,7 +80,7 @@ geometry.js might look like:
 	  ], function(Geometry) {
 	  return Geometry;
 	});
-    
+
 ## Installation
 
 Add this line to your application's Gemfile:
