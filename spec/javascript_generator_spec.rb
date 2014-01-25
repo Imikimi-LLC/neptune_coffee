@@ -22,10 +22,10 @@ describe JavascriptGenerator do
 
     module_js.should == <<ENDJS
 define([
-  './bar/namespace'
-  './bar/file1'
-  './bar/file2'
-  './bar/subdir1'
+  './bar/namespace',
+  './bar/file1',
+  './bar/file2',
+  './bar/subdir1',
   './bar/subdir2'
 ], function(Bar) {
   return Bar;
@@ -39,7 +39,7 @@ ENDJS
     ]
     namespace_js.should == <<ENDJS
 define([
-  './sub_dir1/namespace'
+  './sub_dir1/namespace',
   './sub_dir2/namespace'
 ], function(SubDir1, SubDir2) {
   Bar = (function() {

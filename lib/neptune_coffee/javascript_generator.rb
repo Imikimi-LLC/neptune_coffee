@@ -7,7 +7,7 @@ module NeptuneCoffee
     end
 
     def define_js files, relative_to_path
-      files_js = files.length == 0 ? "" : files.map{|f| "\n  './#{f.relative_path_from(relative_to_path)}'"}.join + "\n"
+      files_js = files.length == 0 ? "" : files.map{|f| "\n  './#{f.relative_path_from(relative_to_path)}'"}.join(",") + "\n"
       "define([#{files_js}], function"
     end
 
