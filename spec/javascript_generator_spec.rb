@@ -29,8 +29,8 @@ define([
   './bar/subdir1',
   './bar/subdir2'
 ], function(Bar, File1, File2) {
-  if (typeof File1 == 'function' && !File1.namespace) {Bar.File1 = File1; File1.namespace = Bar;}
-  if (typeof File2 == 'function' && !File2.namespace) {Bar.File2 = File2; File2.namespace = Bar;}
+  if (typeof File1 == 'function') {Bar.File1 = File1; File1.namespace = Bar;}
+  if (typeof File2 == 'function') {Bar.File2 = File2; File2.namespace = Bar;}
   return Bar;
 });
 ENDJS
