@@ -5,7 +5,7 @@ define([
   './geometry/circle',
   './geometry/solids'
 ], function(Geometry, Box, Circle) {
-  Geometry.Box = Box; Box.namespace = Geometry;
-  Geometry.Circle = Circle; Circle.namespace = Geometry;
+  if (typeof Box == 'function' && !File.namespace) {Geometry.Box = Box; Box.namespace = Geometry;}
+  if (typeof Circle == 'function' && !File.namespace) {Geometry.Circle = Circle; Circle.namespace = Geometry;}
   return Geometry;
 });

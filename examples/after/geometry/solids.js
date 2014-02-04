@@ -3,6 +3,6 @@ define([
   './solids/namespace',
   './solids/cone'
 ], function(Solids, Cone) {
-  Solids.Cone = Cone; Cone.namespace = Solids;
+  if (typeof Cone == 'function' && !File.namespace) {Solids.Cone = Cone; Cone.namespace = Solids;}
   return Solids;
 });
