@@ -11,13 +11,19 @@ module NeptuneCoffee
       "define([#{files_js}], function"
     end
 
-    def module files
+    def module sub_modules, class_files
       # subfiles ||= dir.children.select{|c| !c.directory? && c.extname == ".js"}
-      files = files.map{|f|f.sub_ext("")}
-      files = [dir + "namespace"] + files.select{|c|c.basename.to_s!="namespace"}.sort.uniq
+      class_files = class_files.map{|f|f.sub_ext("")}.select {|c|c.basename.to_s!="namespace"}.sort.uniq
+      files = [dir + "namespace"] + class_files + sub_modules.sort.uniq
+
+      file_class_names = class_files.map {|files| files.basename.to_s.camel_case}
 
       <<-ENDJS
-#{define_js files, dir.dirname}(#{namespace_name}) {
+#{define_js files, dir.dirname}(#{([namespace_name]+file_class_names).join ', '}) {#{
+  file_class_names.map do |fcn|
+    "\n  #{namespace_name}.#{fcn} = #{fcn}; #{fcn}.namespace = #{namespace_name};"
+  end.join
+  }
   return #{namespace_name};
 });
 ENDJS

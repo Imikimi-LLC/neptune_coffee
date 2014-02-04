@@ -14,8 +14,9 @@ describe JavascriptGenerator do
 
   it "module_js" do
     module_js = JavascriptGenerator.new(Pathname["foo"], Pathname["foo/bar"]).module [
-      Pathname["foo/bar/subdir1.js"],
-      Pathname["foo/bar/subdir2.js"],
+      Pathname["foo/bar/subdir1"],
+      Pathname["foo/bar/subdir2"]
+    ], [
       Pathname["foo/bar/file1"],
       Pathname["foo/bar/file2"]
     ]
@@ -27,7 +28,9 @@ define([
   './bar/file2',
   './bar/subdir1',
   './bar/subdir2'
-], function(Bar) {
+], function(Bar, File1, File2) {
+  Bar.File1 = File1; File1.namespace = Bar;
+  Bar.File2 = File2; File2.namespace = Bar;
   return Bar;
 });
 ENDJS

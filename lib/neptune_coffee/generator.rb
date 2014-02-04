@@ -86,8 +86,9 @@ module NeptuneCoffee
     end
 
     def generate_module dir
-      files = dir.children.select {|f| f.extname.downcase == ".js"}
-      safe_generate(dir.sub_ext(".js"))   {JavascriptGenerator.new(root, dir).module(@dirs.subdirs(dir) + files)}
+      subdirs = @dirs.subdirs(dir)
+      files = dir.children.select {|f| f.extname.downcase == ".js" && !subdirs.index(f.sub_ext(""))}
+      safe_generate(dir.sub_ext(".js"))   {JavascriptGenerator.new(root, dir).module(@dirs.subdirs(dir), files)}
     end
 
     def generate_namespace dir
