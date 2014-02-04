@@ -21,7 +21,7 @@ module NeptuneCoffee
       <<-ENDJS
 #{define_js files, dir.dirname}(#{([namespace_name]+file_class_names).join ', '}) {#{
   file_class_names.map do |fcn|
-    "\n  if (typeof #{fcn} == 'function' && !File.namespace) {#{namespace_name}.#{fcn} = #{fcn}; #{fcn}.namespace = #{namespace_name};}"
+    "\n  if (typeof #{fcn} == 'function' && !#{fcn}.namespace) {#{namespace_name}.#{fcn} = #{fcn}; #{fcn}.namespace = #{namespace_name};}"
   end.join
   }
   return #{namespace_name};
