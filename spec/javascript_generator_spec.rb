@@ -45,7 +45,7 @@ define([
   './sub_dir1/namespace',
   './sub_dir2/namespace'
 ], function(SubDir1, SubDir2) {
-  Bar = (function() {
+  var Bar = (function() {
     function Bar() {}
     return Bar;
   })();
@@ -60,7 +60,7 @@ ENDJS
     namespace_js = JavascriptGenerator.new(Pathname["foo"], Pathname["foo/bar"]).namespace []
     namespace_js.should == <<ENDJS
 define([], function() {
-  Bar = (function() {
+  var Bar = (function() {
     function Bar() {}
     return Bar;
   })();

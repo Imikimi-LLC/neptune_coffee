@@ -1,11 +1,11 @@
 #!/usr/bin/ruby
-
+puts "Start"
 require 'trollop'
 require File.expand_path(File.join(File.dirname(__FILE__),'..','lib','neptune_coffee'))
 
 options = Trollop::options ARGV do
   banner <<ENDBANNER
-NeptuneCoffee
+NeptuneCoffee v#{NeptuneCoffee::VERSION}
 
 An opinionated javascript AMD module generator.
 

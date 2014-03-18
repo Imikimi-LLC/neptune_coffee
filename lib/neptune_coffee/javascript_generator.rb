@@ -40,7 +40,7 @@ ENDJS
 
       <<-ENDJS
 #{define_js sub_namespace_files, dir}(#{sub_namespaces.join ', '}) {
-  #{namespace_name} = (function() {
+  var #{namespace_name} = (function() {
     function #{namespace_name}() {}
     return #{namespace_name};
   })();#{

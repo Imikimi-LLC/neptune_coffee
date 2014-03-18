@@ -71,7 +71,8 @@ module NeptuneCoffee
       info_file = file #join @root, file.split(@root)[-1]
       if @overwrite || file_was_generated_by_neptune_coffee(file)
 
-        new_contents = SAFE_GENERATE_FIRST_LINE + " #{NeptuneCoffee::VERSION}\n" + yield
+        new_contents = SAFE_GENERATE_FIRST_LINE + " #{NeptuneCoffee::VERSION}\n" +
+        "// path: #{file.relative_path_from @root}\n" + yield
 
         if @force || !file.exist? || file.read != new_contents
           @generated_files[file] = true
