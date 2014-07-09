@@ -1,5 +1,9 @@
 # Neptune Coffee Changelog
 
+### v0.2.4
+
+Updated Generator#generate_all to now return a Hash of Arrays (instead Hash of Hashes)
+
 ### v0.2.3
 
 Generator#generate_all now returns a Hash of information on what was done:

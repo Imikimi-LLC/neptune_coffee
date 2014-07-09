@@ -60,9 +60,9 @@ module NeptuneCoffee
       success "#{@generated_files.length} files generated" # if @generated_files.length > 0
       warning "#{@skipped_files.length} files skipped (this is a name conflict. We recommend renaming your source file(s)." if @skipped_files.length> 0
       return {
-        current_files: @current_files,
-        generated_files: @generated_files,
-        skipped_files: @skipped_files
+        current_files: @current_files.keys,
+        generated_files: @generated_files.keys,
+        skipped_files: @skipped_files.keys
       }
     end
 
