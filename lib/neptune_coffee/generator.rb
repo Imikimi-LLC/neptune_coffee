@@ -38,6 +38,13 @@ module NeptuneCoffee
       @skipped_files = {}
     end
 
+    # returns:
+    #   {
+    #     current_files:    [Pathnames...]
+    #     generated_files:  [Pathnames...]
+    #     skipped_files:    [Pathnames...]
+    #   }
+
     def generate_all
       reset_file_info
       load_dirs
@@ -52,6 +59,11 @@ module NeptuneCoffee
       success "#{@current_files.length}/#{@to_generate_files.length} files current"
       success "#{@generated_files.length} files generated" # if @generated_files.length > 0
       warning "#{@skipped_files.length} files skipped (this is a name conflict. We recommend renaming your source file(s)." if @skipped_files.length> 0
+      return {
+        current_files: @current_files,
+        generated_files: @generated_files,
+        skipped_files: @skipped_files
+      }
     end
 
     def file_was_generated_by_neptune_coffee file

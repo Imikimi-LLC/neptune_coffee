@@ -40,12 +40,6 @@ For every $subdir, NeptuneCoffee generates:
 	$subdir.js            // loads all .js files in $subdir recursively
 	                      // all three files return $subdir's namespace object
 
-## WARNING: Work in Progress
-This is a work in progress. Unlikely to change:
-* directories-define-modules
-* including the directory_name.js to included the module
-* include ./namespace.js to get the local module's namespace
-
 # How to Use
 
 Install neptune_coffee (see below). Then, whenever your directory structure changes or you move/add/rename/delete files, run:
@@ -84,7 +78,7 @@ geometry.js might look like:
 	  return Geometry;
 	});
 	
-See [examples](https://github.com/Imikimi-LLC/neptune_coffee/tree/master/examples) a complete and current before & after example.
+See [examples](https://github.com/Imikimi-LLC/neptune_coffee/tree/master/examples) for a complete and current before & after example.
 
 ## Installation
 
