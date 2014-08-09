@@ -1,0 +1,15 @@
+<%
+sub_namespace_files = subdirs.map {|subdirs| subdirs + "namespace"}
+sub_namespaces = subdirs.map {|files| files.basename.to_s.camel_case}
+
+define_js files_relative_to(sub_namespace_files, dir), sub_namespaces do %>
+  var <%= namespace_name %> = (function() {
+    function <%= namespace_name %>() {}
+    return <%= namespace_name %>;
+  })();
+<% sub_namespaces.map do |sns| %><%=
+    "  #{namespace_name}.#{sns} = #{sns}; #{sns}.namespace = #{namespace_name};\n"
+  %><%
+  end -%>
+  return <%= namespace_name %>;
+<% end %>

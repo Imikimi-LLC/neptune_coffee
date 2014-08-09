@@ -2,7 +2,7 @@
 
 ### v0.2.4
 
-Updated Generator#generate_all to now return a Hash of Arrays (instead Hash of Hashes)
+Updated Generator#generate_all to now return a Hash of Arrays (instead Hash of Hashes).
 
 ### v0.2.3
 

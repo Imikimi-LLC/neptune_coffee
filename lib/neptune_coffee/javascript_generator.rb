@@ -1,32 +1,55 @@
+require "pathname"
+require "erb"
+
 module NeptuneCoffee
   class JavascriptGenerator
-    attr_accessor :root, :dir
+    class <<self
+      attr_accessor :generators
+      def load_erb
+        generator_root = Pathname.new(__FILE__).parent + "generators"
+        @generators = {}
+        generator_root.children(false).each do |erb_file|
+          name = erb_file.to_s.split(/\.erb$/)[0]
+          path = generator_root + erb_file
+          @generators[name] = ERB.new path.read, nil, "<>-"
+          @generators[name].filename = erb_file
+        end
+      end
+    end
+    JavascriptGenerator.load_erb
+
+    attr_accessor :root, :dir, :sub_modules, :class_files, :subdirs
     def initialize root, dir
       @root = root
       @dir = dir
     end
 
-    def define_js files, relative_to_path
-      files_js = files.length == 0 ? "" : files.map{|f| "\n  './#{f.relative_path_from(relative_to_path)}'"}.join(",") + "\n"
-      "define([#{files_js}], function"
+    def files_relative_to files, relative_to_path
+      files.map {|f| f.relative_path_from relative_to_path}
+    end
+
+    def define_js relative_file_paths, local_names
+      files_js = if relative_file_paths.length == 0 then ""
+      else
+        "\n  " + relative_file_paths.map{|f| "'./#{f}'"}.join(",\n  ") + "\n"
+      end
+
+      old_buffer, @output_buffer = @output_buffer, ''
+      begin
+        content = yield
+      ensure
+        @output_buffer = old_buffer
+      end
+
+      @output_buffer << "define([#{files_js}], function(#{local_names.join ', '}) {#{content}});"
     end
 
     def module sub_modules, class_files
-      # subfiles ||= dir.children.select{|c| !c.directory? && c.extname == ".js"}
-      class_files = class_files.map{|f|f.sub_ext("")}.select {|c|c.basename.to_s!="namespace"}.sort.uniq
-      files = [dir + "namespace"] + class_files + sub_modules.sort.uniq
-
-      file_class_names = class_files.map {|files| files.basename.to_s.camel_case}
-
-      <<-ENDJS
-#{define_js files, dir.dirname}(#{([namespace_name]+file_class_names).join ', '}) {#{
-  file_class_names.map do |fcn|
-    "\n  if (typeof #{fcn} == 'function') {#{namespace_name}.#{fcn} = #{fcn}; #{fcn}.namespace = #{namespace_name};}"
-  end.join
-  }
-  return #{namespace_name};
-});
-ENDJS
+      @output_buffer = ""
+      @sub_modules = sub_modules
+      @class_files = class_files
+      JavascriptGenerator.generators["module.js"].result(binding)
+      @output_buffer
     end
 
     def namespace_name
@@ -34,23 +57,10 @@ ENDJS
     end
 
     def namespace subdirs
-      sub_namespace_files = subdirs.map {|subdirs| subdirs + "namespace"}
-
-      sub_namespaces = subdirs.map {|files| files.basename.to_s.camel_case}
-
-      <<-ENDJS
-#{define_js sub_namespace_files, dir}(#{sub_namespaces.join ', '}) {
-  var #{namespace_name} = (function() {
-    function #{namespace_name}() {}
-    return #{namespace_name};
-  })();#{
-  sub_namespaces.map do |sns|
-    "\n  #{namespace_name}.#{sns} = #{sns}; #{sns}.namespace = #{namespace_name};"
-  end.join
-  }
-  return #{namespace_name};
-});
-ENDJS
+      @output_buffer = ""
+      @subdirs = subdirs
+      JavascriptGenerator.generators["namespace.js"].result(binding)
+      @output_buffer
     end
   end
 end

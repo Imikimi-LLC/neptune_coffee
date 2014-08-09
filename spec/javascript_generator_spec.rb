@@ -21,8 +21,8 @@ describe JavascriptGenerator do
       Pathname["foo/bar/file2"]
     ]
 
-    module_js.should == <<ENDJS
-define([
+    module_js.should ==
+"define([
   './bar/namespace',
   './bar/file1',
   './bar/file2',
@@ -32,16 +32,15 @@ define([
   if (typeof File1 == 'function') {Bar.File1 = File1; File1.namespace = Bar;}
   if (typeof File2 == 'function') {Bar.File2 = File2; File2.namespace = Bar;}
   return Bar;
-});
-ENDJS
+});"
   end
 
   it "namespace_js" do
     namespace_js = JavascriptGenerator.new(Pathname["foo"], Pathname["foo/bar"]).namespace [
       Pathname["foo/bar/sub_dir1"], Pathname["foo/bar/sub_dir2"]
     ]
-    namespace_js.should == <<ENDJS
-define([
+    namespace_js.should ==
+"define([
   './sub_dir1/namespace',
   './sub_dir2/namespace'
 ], function(SubDir1, SubDir2) {
@@ -52,21 +51,19 @@ define([
   Bar.SubDir1 = SubDir1; SubDir1.namespace = Bar;
   Bar.SubDir2 = SubDir2; SubDir2.namespace = Bar;
   return Bar;
-});
-ENDJS
+});"
   end
 
   it "namespace_js with no subdirs" do
     namespace_js = JavascriptGenerator.new(Pathname["foo"], Pathname["foo/bar"]).namespace []
-    namespace_js.should == <<ENDJS
-define([], function() {
+    namespace_js.should ==
+"define([], function() {
   var Bar = (function() {
     function Bar() {}
     return Bar;
   })();
   return Bar;
-});
-ENDJS
+});"
   end
 
 end
