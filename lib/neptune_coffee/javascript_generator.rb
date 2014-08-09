@@ -18,7 +18,7 @@ module NeptuneCoffee
     end
     JavascriptGenerator.load_erb
 
-    attr_accessor :root, :dir, :sub_modules, :class_files, :subdirs
+    attr_accessor :root, :dir, :class_files, :subdirs
     def initialize root, dir
       @root = root
       @dir = dir
@@ -44,9 +44,9 @@ module NeptuneCoffee
       @output_buffer << "define([#{files_js}], function(#{local_names.join ', '}) {#{content}});"
     end
 
-    def module sub_modules, class_files
+    def module subdirs, class_files
       @output_buffer = ""
-      @sub_modules = sub_modules
+      @subdirs = subdirs
       @class_files = class_files
       JavascriptGenerator.generators["module.js"].result(binding)
       @output_buffer
