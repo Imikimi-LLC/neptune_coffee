@@ -1,4 +1,4 @@
-require 'guard/guard'
+require 'guard'
 
 module ::Guard
   module UI

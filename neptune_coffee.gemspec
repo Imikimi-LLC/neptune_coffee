@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "trollop", "~> 2.0"
   spec.add_dependency "extlib" , "~> 0.9"  # for camel_case
   spec.add_dependency "coderay", "~> 1.1"
-  spec.add_dependency "guard"  , "~> 2.6"
+  spec.add_dependency "guard"  , "2.2"
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake",    "~> 10.1"
