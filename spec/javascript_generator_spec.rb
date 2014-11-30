@@ -40,10 +40,7 @@ describe JavascriptGenerator do
       Pathname["foo/bar/sub_dir1"], Pathname["foo/bar/sub_dir2"]
     ]
     namespace_js.should ==
-"define([
-  './sub_dir1/namespace',
-  './sub_dir2/namespace'
-], function(SubDir1, SubDir2) {
+"define([], function() {
   var Bar = (function() {
     function Bar() {}
     return Bar;
