@@ -18,12 +18,12 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "trollop"
-  spec.add_dependency "extlib"  # for camel_case
-  spec.add_dependency "coderay"
-  spec.add_dependency "guard"
+  spec.add_dependency "trollop", "~> 2.0"
+  spec.add_dependency "extlib" , "~> 0.9"  # for camel_case
+  spec.add_dependency "coderay", "~> 1.1"
+  spec.add_dependency "guard"  , "~> 2.6"
 
   spec.add_development_dependency "bundler", "~> 1.3"
-  spec.add_development_dependency "rake"
-  spec.add_development_dependency 'rspec', '~> 2.14.0'
+  spec.add_development_dependency "rake",    "~> 10.1"
+  spec.add_development_dependency 'rspec',   '~> 2.14.0'
 end
