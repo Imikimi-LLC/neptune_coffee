@@ -1,5 +1,12 @@
 # Neptune Coffee Changelog
 
+### v0.2.5
+
+Added: rake reset_examples
+
+Changed generated 'namespace.js' semantics. It no longer includes sub-
+namespaces. Include the generated module file to get all sub-namespaces.
+
 ### v0.2.4
 
 Updated Generator#generate_all to now return a Hash of Arrays (instead Hash of Hashes).

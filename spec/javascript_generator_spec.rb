@@ -48,8 +48,6 @@ describe JavascriptGenerator do
     function Bar() {}
     return Bar;
   })();
-  Bar.SubDir1 = SubDir1; SubDir1.namespace = Bar;
-  Bar.SubDir2 = SubDir2; SubDir2.namespace = Bar;
   return Bar;
 });"
   end
