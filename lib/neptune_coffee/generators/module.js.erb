@@ -3,8 +3,10 @@ class_files = class_files.map{|f|f.sub_ext("")}.select {|c|c.basename.to_s!="nam
 files = [dir + "namespace"] + class_files + subdirs.sort.uniq
 file_class_names = class_files.map {|files| files.basename.to_s.camel_case}
 
-define_js files_relative_to(files, dir.dirname), [namespace_name]+file_class_names do
-  file_class_names.map do |fcn| %>
+sub_namespaces = subdirs.map {|files| files.basename.to_s.camel_case}
+
+define_js files_relative_to(files, dir.dirname), [namespace_name]+file_class_names+sub_namespaces do
+  (file_class_names+sub_namespaces).map do |fcn| %>
   <%= "if (typeof #{fcn} == 'function') {#{namespace_name}.#{fcn} = #{fcn}; #{fcn}.namespace = #{namespace_name};}" %><%
   end
   %>
